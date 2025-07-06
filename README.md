@@ -80,8 +80,6 @@ El sistema utiliza una **arquitectura hexagonal** para separar la lógica de neg
 4. Un consumidor procesa la transacción, actualiza saldos en PostgreSQL y registra un log de auditoría.
 5. El cliente recibe un ID de transacción para seguimiento.
 
-![Diagrama de Arquitectura](diagrama-arquitectura.png)  
-*Nota: Genera un diagrama con Draw.io y súbelo al repositorio.*
 
 ## Requisitos
 
