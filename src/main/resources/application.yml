@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: bank
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 5
+      idle-timeout: 10000
+      max-lifetime: 30000
