@@ -94,3 +94,7 @@ El sistema utiliza una **arquitectura hexagonal** para separar la lógica de neg
    ```bash
    git clone <url-repositorio>
    cd bank
+
+## Arquitectura General
+
+![upscalemedia-transformed](https://github.com/user-attachments/assets/1669f713-87eb-4f4f-a2c5-529dbdd31ba8)
