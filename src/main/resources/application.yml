@@ -8,15 +8,15 @@ spring:
     password: ${PASS}
     driver-class-name: org.postgresql.Driver
     hikari:
-      connection-timeout: 30000       # Tiempo máximo para obtener una conexión (ms)
-      maximum-pool-size: 5            # Número máximo de conexiones en el pool
-      idle-timeout: 10000             # Tiempo que una conexión puede estar inactiva antes de ser cerrada (ms)
-      max-lifetime: 30000             # Tiempo máximo de vida de una conexión en el pool (ms)
+      connection-timeout: 30000
+      maximum-pool-size: 5
+      idle-timeout: 10000
+      max-lifetime: 30000
 
   jpa:
     hibernate:
-      ddl-auto: update                # Crea o actualiza las tablas según las entidades
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: true                    # Muestra las consultas SQL en la consola
+    show-sql: true
