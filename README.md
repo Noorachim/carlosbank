@@ -1,100 +1,135 @@
-# Sistema de Procesamiento de Transacciones Bancarias
+```markdown
+# CarlosBank: Real-Time Banking Transaction Processing System 🚀
 
-![Java](https://img.shields.io/badge/Java-17+-orange)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-green)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue)
-![RabbitMQ](https://img.shields.io/badge/RabbitMQ-3.9-yellow)
-![Docker](https://img.shields.io/badge/Docker-20.10-blue)
-![License](https://img.shields.io/badge/License-MIT-blue)
+![GitHub Repo stars](https://img.shields.io/github/stars/Noorachim/carlosbank?style=social)
+![GitHub forks](https://img.shields.io/github/forks/Noorachim/carlosbank?style=social)
+![GitHub issues](https://img.shields.io/github/issues/Noorachim/carlosbank)
+![GitHub license](https://img.shields.io/github/license/Noorachim/carlosbank)
 
-## Descripción
+## Overview
 
-El **Sistema de Procesamiento de Transacciones Bancarias** es un backend moderno desarrollado con **Spring Boot** que simula el núcleo de un sistema bancario. Permite gestionar cuentas bancarias y procesar transacciones (depósitos, retiros y transferencias) con validaciones en tiempo real, como verificación de saldos, límites diarios y detección básica de fraudes. Las transacciones se procesan de forma asíncrona usando **RabbitMQ**, garantizando escalabilidad y robustez. El sistema incluye autenticación con **JWT**, auditoría de operaciones y monitoreo con **Prometheus** y **Grafana**. Todo está implementado con herramientas **open source** para mantener los costos en cero, y la API se prueba con **Postman**.
+Welcome to **CarlosBank**, a comprehensive system designed for processing banking transactions with real-time validation. This repository serves as a backend solution, ensuring secure and efficient transaction handling in modern banking environments.
 
-Este proyecto es ideal para demostrar habilidades avanzadas en desarrollo backend, diseño de sistemas financieros, arquitectura de microservicios y procesamiento asíncrono. Está diseñado con una **arquitectura hexagonal** para ser modular, testable y escalable.
+### Key Features
 
-## Características Principales
+- **ACID Compliance**: Ensures reliable transactions.
+- **Hexagonal Architecture**: Promotes maintainability and scalability.
+- **Real-Time Monitoring**: Keeps track of transactions as they occur.
+- **PostgreSQL Database**: Reliable data storage solution.
+- **RabbitMQ Integration**: Efficient message queuing for transaction processing.
+- **Spring Boot Framework**: Simplifies the development of production-ready applications.
 
-- **Gestión de cuentas**: Crear y consultar cuentas bancarias (titular, saldo, número de cuenta).
-- **Transacciones**: Procesar depósitos, retiros y transferencias con validaciones:
-  - Verificación de saldo suficiente.
-  - Límites diarios (máximo $10,000 por día).
-  - Detección básica de fraudes (por ejemplo, rechazar transacciones repetitivas en menos de 1 minuto).
-- **Procesamiento asíncrono**: Usa RabbitMQ para encolar y procesar transacciones en segundo plano.
-- **Seguridad**: Autenticación con JWT para proteger endpoints sensibles.
-- **Auditoría**: Registro de todas las operaciones en una tabla de auditoría.
-- **Monitoreo**: Métricas expuestas con Spring Actuator y visualizadas en Grafana.
-- **Pruebas**: Pruebas unitarias (JUnit), de integración (Testcontainers) y manuales con Postman.
-- **Documentación**: API documentada con Springdoc OpenAPI (Swagger UI).
+## Getting Started
 
-## Tecnologías Utilizadas
+To get started with CarlosBank, you can download the latest release from the [Releases section](https://github.com/Noorachim/carlosbank/releases). Make sure to follow the instructions provided in the release notes for proper setup and execution.
 
-- **Backend**:
-  - **Spring Boot 3.x**: Framework para la API RESTful y lógica de negocio.
-  - **Spring Web**: Endpoints REST.
-  - **Spring Data JPA**: Interacción con PostgreSQL.
-  - **Spring Security**: Autenticación con JWT.
-  - **Spring AMQP**: Procesamiento asíncrono con RabbitMQ.
-  - **Spring Boot Actuator**: Métricas de salud y rendimiento.
-- **Base de datos**:
-  - **PostgreSQL**: Almacenamiento de cuentas, transacciones y logs de auditoría.
-  - **H2 Database**: Base de datos embebida para pruebas.
-- **Colas**:
-  - **RabbitMQ**: Procesamiento asíncrono de transacciones.
-- **Despliegue local**:
-  - **Docker**: Contenedorización de servicios.
-  - **Docker Compose**: Orquestación de PostgreSQL, RabbitMQ, Prometheus y Grafana.
-- **Monitoreo**:
-  - **Prometheus**: Recolección de métricas.
-  - **Grafana**: Visualización de métricas.
-- **Pruebas**:
-  - **JUnit 5**: Pruebas unitarias.
-  - **MockMvc**: Pruebas de endpoints REST.
-  - **Testcontainers**: Pruebas de integración con contenedores.
-  - **Postman**: Pruebas manuales de la API.
-- **Documentación**:
-  - **Springdoc OpenAPI**: Documentación automática de la API.
-- **Otras herramientas**:
-  - **Java 17**: Lenguaje de programación.
-  - **Maven**: Gestión de dependencias.
-  - **Mockaroo**: Generación de datos de prueba.
-  - **Draw.io**: Diagramas de arquitectura.
+### Prerequisites
 
-## Arquitectura
+Before running CarlosBank, ensure you have the following installed:
 
-El sistema utiliza una **arquitectura hexagonal** para separar la lógica de negocio de la infraestructura, garantizando modularidad y testabilidad. Los componentes principales son:
+- **Java 11 or higher**: Required to run the Spring Boot application.
+- **Docker**: For containerization of the application and its dependencies.
+- **PostgreSQL**: The database used for storing transaction data.
+- **RabbitMQ**: For message brokering.
 
-- **Controladores REST**: Exponen endpoints como `/api/accounts` y `/api/transactions`.
-- **Servicios**: Contienen la lógica de negocio (validaciones, procesamiento).
-- **Repositorios**: Gestionan el acceso a PostgreSQL.
-- **Adaptadores**: Conectan con RabbitMQ y PostgreSQL.
-- **Colas**: Procesan transacciones asíncronamente.
-- **Seguridad**: JWT para autenticación.
-- **Auditoría**: Registro de operaciones.
-- **Monitoreo**: Métricas con Spring Actuator, Prometheus y Grafana.
+### Installation
 
-### Flujo de una Transacción
-1. El cliente envía una solicitud a la API (por ejemplo, `POST /api/transactions`) con un token JWT.
-2. El controlador valida el token y pasa la solicitud al servicio.
-3. El servicio aplica validaciones (saldo, límites, fraudes) y encola la transacción en RabbitMQ.
-4. Un consumidor procesa la transacción, actualiza saldos en PostgreSQL y registra un log de auditoría.
-5. El cliente recibe un ID de transacción para seguimiento.
-
-
-## Requisitos
-
-- **Java 17+**
-- **Maven**
-- **Docker** y **Docker Compose**
-- **Postman** (plan gratuito)
-
-## Configuración del Proyecto
-
-1. **Clona el repositorio**:
+1. Clone the repository:
    ```bash
-   git clone <url-repositorio>
-   cd bank
+   git clone https://github.com/Noorachim/carlosbank.git
+   cd carlosbank
+   ```
 
-## Arquitectura General
+2. Set up the PostgreSQL database:
+   - Create a new database for the application.
+   - Update the database connection settings in the `application.properties` file.
 
-![upscalemedia-transformed](https://github.com/user-attachments/assets/1669f713-87eb-4f4f-a2c5-529dbdd31ba8)
+3. Build the application using Maven:
+   ```bash
+   ./mvnw clean install
+   ```
+
+4. Run the application:
+   ```bash
+   ./mvnw spring-boot:run
+   ```
+
+### Docker Setup
+
+For those who prefer using Docker, you can easily set up CarlosBank with the following steps:
+
+1. Build the Docker image:
+   ```bash
+   docker build -t carlosbank .
+   ```
+
+2. Run the Docker container:
+   ```bash
+   docker run -d -p 8080:8080 carlosbank
+   ```
+
+### API Documentation
+
+CarlosBank provides a robust API for interacting with the banking transaction system. You can find the Postman collection for the API [here](https://github.com/Noorachim/carlosbank/blob/main/Postman_Collection.json).
+
+### Monitoring
+
+To monitor the application, we recommend using tools like Prometheus and Grafana. These tools can help visualize the performance and health of the CarlosBank application in real-time.
+
+### Topics Covered
+
+- **ACID**: Ensures that transactions are processed reliably.
+- **Arquitectura Hexagonal**: A design pattern that promotes separation of concerns.
+- **Backend**: The server-side logic of the application.
+- **Banking**: Focused on financial transactions.
+- **Docker**: Containerization for easy deployment.
+- **Monitoring**: Keeping track of application performance.
+- **PostgreSQL Database**: The primary data storage solution.
+- **Postman Collection**: For API testing and documentation.
+- **RabbitMQ**: Message broker for asynchronous processing.
+- **Spring**: Framework for building Java applications.
+- **Spring Boot**: Simplifies the development of Spring applications.
+- **Transactions**: Core functionality of the banking system.
+
+## Contributing
+
+We welcome contributions to CarlosBank! If you have suggestions for improvements or want to report issues, please feel free to open an issue or submit a pull request.
+
+### Steps to Contribute
+
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
+3. Make your changes and commit them:
+   ```bash
+   git commit -m "Add your message here"
+   ```
+4. Push to your branch:
+   ```bash
+   git push origin feature/YourFeature
+   ```
+5. Open a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/Noorachim/carlosbank/blob/main/LICENSE) file for details.
+
+## Contact
+
+For any inquiries, please reach out via GitHub issues or contact the maintainer directly.
+
+You can always check the [Releases section](https://github.com/Noorachim/carlosbank/releases) for updates and new features. 
+
+### Acknowledgments
+
+- Thanks to the contributors who have helped make CarlosBank better.
+- Inspired by modern banking practices and technologies.
+
+![Banking Image](https://example.com/banking-image.png)
+
+---
+
+Explore the full capabilities of CarlosBank and experience a new standard in banking transaction processing. Join us on this journey toward efficient and reliable banking solutions!
+```
